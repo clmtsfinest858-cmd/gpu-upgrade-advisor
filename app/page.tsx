@@ -139,38 +139,42 @@ export default function Home() {
 
       {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
 
-      {rec && (
-        <section style={{ marginTop: "2rem", padding: "1rem", border: "1px solid #ccc" }}>
-          <h2>Recommended GPU</h2>
-          <p><strong>{rec.name}</strong> – ${rec.price.toFixed(2)}</p>
-          <p>Estimated FPS gain: {rec.estFpsGainPercent}%</p>
-          <p>Cost per FPS improvement point: ${rec.costPerFpsPoint != null ? rec.costPerFpsPoint.toFixed(2) : "N/A"}</p>
+{rec && (
+  <section style={{ marginTop: "2rem", padding: "1rem", border: "1px solid #ccc" }}>
+    <h2>Recommended GPU</h2>
+    <p><strong>{rec.name}</strong> – ${rec.price.toFixed(2)}</p>
+    <p>Estimated FPS gain: {rec.estFpsGainPercent}%</p>
+    <p>Cost per FPS improvement point: {rec.costPerFpsPoint != null ? rec.costPerFpsPoint.toFixed(2) : "N/A"}</p>
 
-          {rec.affiliateUrls ? (
-            <div style={{ marginTop: "1rem" }}>
-              <p>Buy links:</p>
-              <ul>
-                {rec.affiliateUrls.amazon && (
-                  <li><a href={rec.affiliateUrls.amazon} target="_blank" rel="noreferrer">Amazon</a></li>
-                )}
-                {rec.affiliateUrls.newegg && (
-                  <li><a href={rec.affiliateUrls.newegg} target="_blank" rel="noreferrer">Newegg</a></li>
-                )}
-                {rec.affiliateUrls.ebay && (
-                  <li><a href={rec.affiliateUrls.ebay} target="_blank" rel="noreferrer">eBay</a></li>
-                )}
-                {rec.affiliateUrls.canonical && (
-                  <li><a href={rec.affiliateUrls.canonical} target="_blank" rel="noreferrer">Canonical</a></li>
-                )}
-              </ul>
-            </div>
-          ) : (
-            <p>
-              <a href={rec.affiliateUrls?.canonical || "#"} target="_blank" rel="noreferrer">Buy link</a>
-            </p>
+    {rec.affiliateUrls ? (
+      <div style={{ marginTop: "1rem" }}>
+        <p>Buy links:</p>
+        <ul>
+          {rec.affiliateUrls.amazon && (
+            <li><a href={rec.affiliateUrls.amazon} target="_blank" rel="noreferrer">Amazon</a></li>
           )}
-        </section>
-      )}
-    </main>
+ {rec.affiliateUrls.newegg && (
+            <li><a href={rec.affiliateUrls.newegg} target="_blank" rel="noreferrer">Newegg</a></li>
+          )}
+          {rec.affiliateUrls.ebay && (
+            <li><a href={rec.affiliateUrls.ebay} target="_blank" rel="noreferrer">eBay</a></li>
+          )}
+          {rec.affiliateUrls.canonical && (
+            <li>
+              <a href={(rec as any).affiliateUrls?.canonical ?? "#"} target="_blank" rel="noreferrer">
+                Buy link
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
+    ) : (
+      <p>
+        <a href={(rec as any).affiliateUrls?.canonical ?? "#"} target="_blank" rel="noreferrer">Buy link</a>
+      </p>
+    )}
+  </section>
+)}
+</main>
   );
 }
